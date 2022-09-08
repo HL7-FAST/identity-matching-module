@@ -9,6 +9,7 @@ import {
   matchGrade
 } from "./MatchUtilities.js"
 
+import { get } from 'lodash'
 
 let fhirPath = get(Meteor, 'settings.private.fhir.fhirPath', 'baseR4');
 

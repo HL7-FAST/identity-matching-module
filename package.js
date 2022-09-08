@@ -16,7 +16,6 @@ Package.onUse(function(api) {
   api.use('clinical:json-routes');
   api.use('clinical:vault-server');
   api.addFiles('routes.js', 'server');
-  api.mainModule('identity-matching-module.js');
 });
 
 Package.onTest(function(api) {
@@ -24,4 +23,8 @@ Package.onTest(function(api) {
   api.use('tinytest');
   api.use('hl7-fast:identity-matching-module');
   api.mainModule('identity-matching-module-tests.js');
+});
+
+Npm.depends({
+    'lodash': '4.0.0'
 });
