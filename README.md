@@ -9,6 +9,7 @@ Node-on-Fhir package for `Patient/$match` operation for [Interoperable identity 
 ```
 # clone node-on-fhir
 # clone/pull repo into node-on-fhir/packages/
+# cd into node-on-fhir
 meteor add clinical:vault-server
 meteor add hl7-fast:identity-matching
 ```
