@@ -1,10 +1,9 @@
-import RestHelpers from 'meteor/clinical:vault-server/FhirServer/RestHelpers';
-import fhirPathToMongo from 'meteor/clinical:vault-server/FhirServer/FhirPath';
+// import RestHelpers from '../FhirServer/RestHelpers';
+// import fhirPathToMongo from '../FhirServer/FhirPath';
 
 import { get, has, set, find, unset, cloneDeep, capitalize, findIndex, countBy } from 'lodash';
 import moment from 'moment';
 import { Meteor } from 'meteor/meteor';
-
 
 const BASE_PROFILE = "http://hl7.org/fhir/us/identity-matching/StructureDefinition/IDI-Patient";
 const LEVEL0_PROFILE = "http://hl7.org/fhir/us/identity-matching/StructureDefinition/IDI-Patient-L0";
@@ -93,6 +92,9 @@ function calculateScore(patient, params) {
 																											)))
 	{
 		score += 0.2-(0.05*Math.abs(get(params, 'birthDate').length-get(patient, 'birthDate').length)/3);
+	}
+	if (fieldExists(patient, params, 'address[0].postalCode') && (get(params, 'address[0].postalCode') == get(patient, 'address[0].postalCode'))) {
+		score += 0.1* score>=0.6? 0 : 1;
 	}
 	console.log("score", score);
 	return score;
