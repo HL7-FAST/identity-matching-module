@@ -97,7 +97,7 @@ function calculateScore(patient, params) {
 		score += 0.1* score>=0.6? 0 : 1;
 	}
 	console.log("score", score);
-	return score;
+	return score <=1? score : 1;
 }
 
 
@@ -133,10 +133,10 @@ function validateMinimumRequirement(matchParams) {
   return ERROR_CODES['profile not met'];
 }
 
-function calculateWeight(matchParams) {
-  return 20;
+// function calculateWeight(matchParams) {
+//   return 20;
 
-}
+// }
 
 // param patientResource: IDIPatient profile FHIR resource
 // returns bool

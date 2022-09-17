@@ -59,7 +59,7 @@ JsonRoutes.add("POST", fhirPath + "/Patient/$match", function(req, res, next) {
 
       if(matchingRecords.length === 0 ){
           JsonRoutes.sendResult(res, {
-            code: 400,
+            code: 200,
             data: {
               "resourceType": "OperationOutcome",
               "severity": "warning",
@@ -105,6 +105,7 @@ JsonRoutes.add("POST", fhirPath + "/Patient/$match", function(req, res, next) {
                     status: "200"
                   }
               });
+              payload.sort((a, b) => (a.search.score > b.search.score ? 1 : -1));
           });
 
           console.log('payload', payload);
