@@ -19,7 +19,7 @@ Package.onUse(function(api) {
 });
 
 Package.onTest(function(api) {
-  api.use('ecmascript');
+  api.use('ecmascript@0.16.0');
   api.use('tinytest');
   api.use('hl7-fast:identity-matching-module');
   api.mainModule('identity-matching-module-tests.js');
