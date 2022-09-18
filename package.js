@@ -12,7 +12,7 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('2.7.3');
-  api.use('ecmascript');
+  api.use('ecmascript@0.16.0');
   api.use('clinical:json-routes');
   api.use('clinical:vault-server');
   api.addFiles('routes.js', 'server');
