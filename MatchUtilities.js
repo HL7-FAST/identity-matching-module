@@ -143,20 +143,20 @@ function validateMinimumRequirement(matchParams) {
 function hasAddress(patientResource) {
 	return has(patientResource, "address[0].line") &&
 		   ( has(patientResource, "address[0].zipcode") ||
-		     (has(patientResource, "address[0].state") && has(patientResource, "address[0].city"))
+		     (has(patientResource, "address[0].city"))
 		   );
 }
 
 // param patientResource: IDIPatient profile FHIR resource
 // returns bool
 function hasPhone(patientResource) {
-	return get(patientResource, "telecom.system") == "phone";
+	return get(patientResource, "telecom[0].system") == "phone";
 }
 
 // param patientResource: IDIPatient profile FHIR resource
 // returns bool
 function hasEmail(patientResource) {
-	return get(patientResource, "telecom.system") == "email";
+	return get(patientResource, "telecom[0].system") == "email";
 }
 
 // param patientResource: IDIPatient profile FHIR resource

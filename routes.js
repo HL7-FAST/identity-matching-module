@@ -57,24 +57,24 @@ JsonRoutes.add("POST", fhirPath + "/Patient/$match", function(req, res, next) {
 
       let payload = [];
 
-      if(matchingRecords.length === 0 ){
-          JsonRoutes.sendResult(res, {
-            code: 200,
-            data: {
-              "resourceType": "OperationOutcome",
-              "severity": "warning",
-              "code": "invalid",
-              "details": {
-                "text": "No Resource found matching the query",
-                "coding": {
-                  "system": "http://terminology.hl7.org/CodeSystem/operation-outcome",
-                  "value": "MSG_NO_MATCH",
-                  "display": "No Resource found matching the query"
-                }
-              }
-            }
-          });
-      } else {
+      // if(matchingRecords.length === 0 ){
+      //     JsonRoutes.sendResult(res, {
+      //       code: 200,
+      //       data: {
+      //         "resourceType": "OperationOutcome",
+      //         "severity": "warning",
+      //         "code": "invalid",
+      //         "details": {
+      //           "text": "No Resource found matching the query",
+      //           "coding": {
+      //             "system": "http://terminology.hl7.org/CodeSystem/operation-outcome",
+      //             "value": "MSG_NO_MATCH",
+      //             "display": "No Resource found matching the query"
+      //           }
+      //         }
+      //       }
+      //     });
+      // } else {
           matchingRecords.forEach(function(record, index){
               // console.log('record', get(record, 'name'))
 
@@ -106,6 +106,10 @@ JsonRoutes.add("POST", fhirPath + "/Patient/$match", function(req, res, next) {
                   }
               });
               payload.sort((a, b) => (a.search.score > b.search.score ? 1 : -1));
+              let requestedCount = get(req, 'body.parameter').filter((param => {return typeof param.valueInteger !== "undefined"}));
+              if (requestedCount.length > 0) {
+                payload = payload.slice(0, requestedCount[0].valueInteger);
+              }
           });
 
           console.log('payload', payload);
@@ -118,6 +122,6 @@ JsonRoutes.add("POST", fhirPath + "/Patient/$match", function(req, res, next) {
             code: 200,
             data: payloadBundle
           });
-      }
+      // }
   }
 });
